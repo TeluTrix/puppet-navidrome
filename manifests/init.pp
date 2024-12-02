@@ -5,16 +5,16 @@
 # @example
 #   include navidrome
 class navidrome (
-  String $ensure,
-  Boolean $enable,
-  String $service_name,
-  String $version,
-  String $user,
-  String $password,
-  String $executable_dir,
-  String $working_dir,
-  String $ffmpeg_ensure,
-  String $ffmpeg_name
+  Optional[String] $ensure,
+  Optiona[Boolean] $enable,
+  Optional[String] $service_name,
+  Optional[String] $version,
+  Optional[String] $user,
+  Optional[String] $password,
+  Optional[String] $executable_dir,
+  Optional[String] $working_dir,
+  Optional[String] $ffmpeg_ensure,
+  Optional[String] $ffmpeg_name
 
 ) {
   include navidrome::configuration
