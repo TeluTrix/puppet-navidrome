@@ -1,5 +1,4 @@
 ---
-
 navidrome::version: '0.53.3'
 navidrome::user: &user 'navidrome'
 navidrome::ensure: running
@@ -10,7 +9,6 @@ navidrome::executable_dir: '/opt/navidrome'
 navidrome::working_dir: &working_dir '/var/lib/navidrome'
 navidrome::ffmpeg_ensure: present
 navidrome::ffmpeg_name: 'ffmpeg'
-
 navidrome::configuration::music_folder: '/var/data/music'
 navidrome::configuration::log_level: 'debug'
 navidrome::configuration::scan_schedule: '@every 12h'
