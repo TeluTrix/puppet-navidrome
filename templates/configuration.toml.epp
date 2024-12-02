@@ -1,12 +1,12 @@
-<%- | String  $music_folder,
-      String  $data_folder,
-      String  $log_level,
-      String  $scan_schedule,
-      String  $transcoding_cache_size,
-      String  $cache_folder,
-      String  $address,
-      String  $base_url,
-      Integer $port,
+<%- | Optional[String]  $music_folder,
+      Optional[String]  $data_folder,
+      Optional[String]  $log_level,
+      Optional[String]  $scan_schedule,
+      Optional[String]  $transcoding_cache_size,
+      Optional[String]  $cache_folder,
+      Optional[String]  $address,
+      Optional[String]  $base_url,
+      Optional[Integer] $port,
 | -%>
 <% if $log_level { -%>
 LogLevel = '<%= $log_level %>'
