@@ -7,7 +7,7 @@
 class navidrome::configuration (
   String  $music_folder,
   String  $data_folder,
-  Optional['warn', 'info', 'debug', 'trace'] $log_level,
+  Enum['warn', 'info', 'debug', 'trace'] $log_level,
   String  $scan_schedule,
   String  $transcoding_cache_size,
   String  $cache_folder,
