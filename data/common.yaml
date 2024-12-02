@@ -1,4 +1,4 @@
---- {}
+---
 
 navidrome::version: '0.53.3'
 navidrome::user: &user 'navidrome'
