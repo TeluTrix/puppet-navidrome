@@ -6,7 +6,7 @@
 #   include navidrome
 class navidrome (
   Optional[String] $ensure,
-  Optiona[Boolean] $enable,
+  Optional[Boolean] $enable,
   Optional[String] $service_name,
   Optional[String] $version,
   Optional[String] $user,
