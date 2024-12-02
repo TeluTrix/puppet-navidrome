@@ -1,0 +1,37 @@
+<%- | String  $music_folder,
+      String  $data_folder,
+      String  $log_level,
+      String  $scan_schedule,
+      String  $transcoding_cache_size,
+      String  $cache_folder,
+      String  $address,
+      String  $base_url,
+      Integer $port,
+| -%>
+<% if $log_level { -%>
+LogLevel = '<%= $log_level %>'
+<% } -%>
+<% if $scan_schedule { -%>
+ScanSchedule = '<%= $scan_schedule %>'
+<% } -%>
+<% if $transcoding_cache_size { -%>
+TranscodingCacheSize = '<%= $transcoding_cache_size %>'
+<% } -%>
+<% if $music_folder { -%>
+MusicFolder = '<%= $music_folder %>'
+<% } -%>
+<% if $data_folder { -%>
+DataFolder = '<%= $data_folder %>'
+<% } -%>
+<% if $cache_folder { -%>
+CacheFolder = '<%= $cache_folder %>'
+<% } -%>
+<% if $address { -%>
+Address = '<%= $address %>'
+<% } -%>
+<% if $base_url { -%>
+BaseUrl = '<%= $base_url %>'
+<% } -%>
+<% if $port { -%>
+Port = <%= $port %>
+<% } -%>

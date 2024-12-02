@@ -1,0 +1,44 @@
+<%- | String  $systemd_description,
+      String  $systemd_path,
+      String  $systemd_after,
+      String  $systemd_user,
+      String  $systemd_wantedby,
+      String  $systemd_type,
+      String  $systemd_navidrome_location,
+      String  $systemd_settings_location,
+      String  $systemd_working_dir,
+      Integer $systemd_timeout_stop_sec,
+      String  $systemd_killmode,
+      String  $systemd_restart,
+| -%>
+[Unit]
+Description=<%= $systemd_description %>
+After=<%= $systemd_after %>
+AssertPathExists=<%= $systemd_path %>
+
+[Install]
+WantedBy=<%= $systemd_wantedby %>
+
+[Service]
+User=<%= $systemd_user %>
+Group=<%= $systemd_user %>
+Type=<%= $systemd_type %>
+ExecStart="<%= $systemd_navidrome_location %> --configfile '<%= $systemd_settings_location %>'"
+WorkingDirectory=<%= $systemd_working_dir %>
+TimeoutStopSec=<%= $systemd_timeout_stop_sec %>
+KillMode=<%= $systemd_killmode %>
+Restart=<%= $systemd_restart %>
+
+DevicePolicy=closed
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateUsers=yes
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=yes
+RestrictRealtime=yes
+SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap
+ReadWritePaths=<%= $systemd_working_dir %>
+ProtectSystem=full
