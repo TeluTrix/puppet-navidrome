@@ -66,6 +66,13 @@ class navidrome (
     password => $password,
   }
 
+  file { $music_folder:
+    ensure => directory,
+    path   => $music_folder,
+    owner  => $user,
+    group  => $user,
+  }
+
   file { $executable_dir:
     ensure => directory,
     path   => $executable_dir,
