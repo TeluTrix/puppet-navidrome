@@ -54,7 +54,7 @@ class navidrome::configuration (
         'systemd_navidrome_location' => $systemd_navidrome_location,
         'systemd_settings_location'  => $systemd_settings_location,
         'systemd_working_dir'        => $systemd_working_dir,
-        'systemd_timeout_stop_se'    => $systemd_timeout_stop_sec,
+        'systemd_timeout_stop_sec'   => $systemd_timeout_stop_sec,
         'systemd_killmode'           => $systemd_killmode,
         'systemd_restart'            => $systemd_restart,
     }),
