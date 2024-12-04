@@ -7,7 +7,7 @@
       Optional[String]  $address,
       Optional[String]  $base_url,
       Optional[Integer] $port,
-      Optional[Integer] $reverse_proxy_whitelist,
+      Optional[Array[String]]  $reverse_proxy_whitelist,
 | -%>
 <% if $log_level { -%>
 LogLevel = '<%= $log_level %>'
