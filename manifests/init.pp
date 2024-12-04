@@ -110,10 +110,18 @@ class navidrome (
     $port = $navidrome::configuration::port
   }
 
+  # Enable port in firewall
   firewalld_port { 'Open port for navidrome to the public':
     ensure   => present,
     zone     => 'public',
     port     => $port,
     protocol => 'tcp',
+  }
+
+  # Make sure firewalld is running
+  service { 'firewalld':
+    ensure => running,
+    enable => true,
+    name   => 'firewalld',
   }
 }
