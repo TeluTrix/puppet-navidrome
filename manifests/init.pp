@@ -55,7 +55,7 @@ class navidrome (
 
   # Install the necessary packages (vlc, ffmpeg, jellyfin)
   package { $ffmpeg_name:
-    ensure          => $ffmpeg_name,
+    ensure          => $ffmpeg_ensure,
     install_options => ['--allowerasing'],
     require         => [Exec['add_rpmfusion_repo_free'], Exec['add_rpmfusion_repo_non_free']],
   }
