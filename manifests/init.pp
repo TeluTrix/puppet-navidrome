@@ -66,7 +66,7 @@ class navidrome (
     password => $password,
   }
 
-  file { $music_folder:
+  file { $navidrome::configuration::music_folder:
     ensure => directory,
     path   => $music_folder,
     owner  => $user,
