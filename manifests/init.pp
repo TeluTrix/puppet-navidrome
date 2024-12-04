@@ -30,24 +30,32 @@ class navidrome (
     require => Package['epel-release'],
   }
 
-# Add the RPM Fusion repositories
+  # Enable CRB (CodeReady Builder) repository
+  exec { 'enable_crb_repo':
+    command => '/bin/bash -c "dnf config-manager --set-enabled crb"',
+    path    => ['/bin', '/usr/bin'],
+    unless  => '/bin/bash -c "dnf repolist | grep -q crb"',
+    require => Exec['enable_epel_repo'],
+  }
+
+  # Add the RPM Fusion repositories
   exec { 'add_rpmfusion_repo_free':
     command => '/bin/bash -c "dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm"',
     path    => ['/bin', '/usr/bin'],
     creates => '/etc/yum.repos.d/rpmfusion-free.repo',
-    require => Exec['enable_epel_repo'],
+    require => Exec['enable_crb_repo'],
   }
 
   exec { 'add_rpmfusion_repo_non_free':
     command => '/bin/bash -c "dnf install -y https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm"',
     path    => ['/bin', '/usr/bin'],
     creates => '/etc/yum.repos.d/rpmfusion-nonfree.repo',
-    require => Exec['enable_epel_repo'],
+    require => Exec['enable_crb_repo'],
   }
 
-  # Install the necessary packages (ffmpeg)
+  # Install the necessary packages (vlc, ffmpeg, jellyfin)
   package { $ffmpeg_name:
-    ensure          => $ffmpeg_ensure,
+    ensure          => $ffmpeg_name,
     install_options => ['--allowerasing'],
     require         => [Exec['add_rpmfusion_repo_free'], Exec['add_rpmfusion_repo_non_free']],
   }
