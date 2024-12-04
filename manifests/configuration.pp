@@ -30,6 +30,21 @@ class navidrome::configuration (
   file { '/var/lib/navidrome/configuration.toml':
     ensure  => file,
     content => epp('navidrome/configuration.toml.epp', {
+        'music_folder'           => $music_folder,
+        'data_folder'            => $data_folder,
+        'log_level'              => $log_level,
+        'scan_schedule'          => $scan_schedule,
+        'transcoding_cache_size' => $transcoding_cache_size,
+        'cache_folder'           => $cache_folder,
+        'address'                => $address,
+        'base_url'               => $base_url,
+        'port'                   => $port,
+    }),
+  }
+
+  file { '/etc/systemd/system/navidrome.service':
+    ensure  => file,
+    content => epp('navidrome/navidrome.service.epp', {
         'systemd_description'        => $systemd_description,
         'systemd_path'               => $systemd_path,
         'systemd_after'              => $systemd_after,
@@ -42,21 +57,6 @@ class navidrome::configuration (
         'systemd_timeout_stop_se'    => $systemd_timeout_stop_sec,
         'systemd_killmode'           => $systemd_killmode,
         'systemd_restart'            => $systemd_restart,
-    }),
-  }
-
-  file { '/etc/systemd/system/navidrome.service':
-    ensure  => file,
-    content => epp('navidrome/navidrome.service.epp', {
-        'music_folder'           => $music_folder,
-        'data_folder'            => $data_folder,
-        'log_level'              => $log_level,
-        'scan_schedule'          => $scan_schedule,
-        'transcoding_cache_size' => $transcoding_cache_size,
-        'cache_folder'           => $cache_folder,
-        'address'                => $address,
-        'base_url'               => $base_url,
-        'port'                   => $port,
     }),
   }
 }
