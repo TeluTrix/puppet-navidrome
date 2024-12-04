@@ -27,9 +27,9 @@ class navidrome::configuration (
   Optional[String]  $systemd_killmode,
   Optional[String]  $systemd_restart,
 ) {
-  file { '/var/lib/navidrome/configuration.toml':
+  file { '/var/lib/navidrome/navidrome.toml':
     ensure  => file,
-    content => epp('navidrome/configuration.toml.epp', {
+    content => epp('navidrome/navidrome.toml.epp', {
         'music_folder'           => $music_folder,
         'data_folder'            => $data_folder,
         'log_level'              => $log_level,
