@@ -103,4 +103,17 @@ class navidrome (
     enable => $enable,
     name   => $service_name,
   }
+
+  if !$navidrome::configuration::port {
+    $port = 4533
+  } else {
+    $port = $navidrome::configuration::port
+  }
+
+  firewalld_port { 'Open port for navidrome to the public':
+    ensure   => present,
+    zone     => 'public',
+    port     => $port,
+    protocol => 'tcp',
+  }
 }
