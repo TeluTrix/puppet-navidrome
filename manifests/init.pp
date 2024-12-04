@@ -19,9 +19,37 @@ class navidrome (
 ) {
   include navidrome::configuration
 
+  package { 'epel-release':
+    ensure  => $package_ensure,
+  }
+
+  exec { 'enable_epel_repo':
+    command => '/bin/bash -c "dnf config-manager --set-enabled epel && dnf clean all"',
+    path    => ['/bin', '/usr/bin'],
+    unless  => '/bin/bash -c "dnf repolist | grep -q epel"',
+    require => Package['epel-release'],
+  }
+
+# Add the RPM Fusion repositories
+  exec { 'add_rpmfusion_repo_free':
+    command => '/bin/bash -c "dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm"',
+    path    => ['/bin', '/usr/bin'],
+    creates => '/etc/yum.repos.d/rpmfusion-free.repo',
+    require => Exec['enable_epel_repo'],
+  }
+
+  exec { 'add_rpmfusion_repo_non_free':
+    command => '/bin/bash -c "dnf install -y https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm"',
+    path    => ['/bin', '/usr/bin'],
+    creates => '/etc/yum.repos.d/rpmfusion-nonfree.repo',
+    require => Exec['enable_epel_repo'],
+  }
+
+  # Install the necessary packages (ffmpeg)
   package { $ffmpeg_name:
-    ensure => $ffmpeg_ensure,
-    name   => $ffmpeg_name,
+    ensure          => $ffmpeg_ensure,
+    install_options => ['--allowerasing'],
+    require         => [Exec['add_rpmfusion_repo_free'], Exec['add_rpmfusion_repo_non_free']],
   }
 
   user { $user:
