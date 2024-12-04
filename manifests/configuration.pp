@@ -40,8 +40,8 @@ class navidrome::configuration (
         'base_url'               => $base_url,
         'port'                   => $port,
     }),
-    owner  => $user,
-    group  => $user,
+    owner                        => $navidrome::user,
+    group                        => $navidrome::user,
   }
 
   file { '/etc/systemd/system/navidrome.service':
