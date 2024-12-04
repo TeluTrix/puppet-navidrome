@@ -30,3 +30,4 @@ navidrome::configuration::cache_folder:
 navidrome::configuration::address:
 navidrome::configuration::base_url:
 navidrome::configuration::port:
+navidrome::configuration::reverse_proxy_whitelist:
