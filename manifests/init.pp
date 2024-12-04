@@ -5,16 +5,16 @@
 # @example
 #   include navidrome
 class navidrome (
-  Optional[String] $ensure,
+  Optional[String]  $ensure,
   Optional[Boolean] $enable,
-  Optional[String] $service_name,
-  Optional[String] $version,
-  Optional[String] $user,
-  Optional[String] $password,
-  Optional[String] $executable_dir,
-  Optional[String] $working_dir,
-  Optional[String] $ffmpeg_ensure,
-  Optional[String] $ffmpeg_name
+  Optional[String]  $service_name,
+  Optional[String]  $version,
+  Optional[String]  $user,
+  Optional[String]  $password,
+  Optional[String]  $executable_dir,
+  Optional[String]  $working_dir,
+  Optional[String]  $ffmpeg_ensure,
+  Optional[String]  $ffmpeg_name
 
 ) {
   include navidrome::configuration
@@ -47,7 +47,7 @@ class navidrome (
   $archive_name = "navidrome_${version}_linux_amd64.tar.gz"
   $download_uri = "https://github.com/navidrome/navidrome/releases/download/v${version}/${archive_name}"
   archive { "${executable_dir}/${archive_name}":
-    ensure       => $ensure,
+    ensure       => 'present',
     source       => $download_uri,
     user         => $user,
     group        => $user,
