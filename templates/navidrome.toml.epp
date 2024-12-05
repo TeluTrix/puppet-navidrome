@@ -42,8 +42,8 @@ Port = <%= $port %>
 ReverseProxyWhitelist = <%= $reverse_proxy_whitelist %>
 <% } -%>
 <% if $lastfm_api_key { -%>
-LastFM.ApiKey = <%= $lastfm_api_key %>
+LastFM.ApiKey = '<%= $lastfm_api_key %>'
 <% } -%>
 <% if $lastfm_api_secret { -%>
-LastFM.Secret = <%= $lastfm_api_secret %>
+LastFM.Secret = '<%= $lastfm_api_secret %>'
 <% } -%>
