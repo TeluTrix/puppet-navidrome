@@ -31,3 +31,5 @@ navidrome::configuration::address:
 navidrome::configuration::base_url:
 navidrome::configuration::port:
 navidrome::configuration::reverse_proxy_whitelist:
+navidrome::configuration::lastfm_api_key:
+navidrome::configuration::lastfm_api_secret:

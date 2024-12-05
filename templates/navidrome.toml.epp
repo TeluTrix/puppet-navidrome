@@ -8,6 +8,8 @@
       Optional[String]  $base_url,
       Optional[Integer] $port,
       Optional[Array[String]]  $reverse_proxy_whitelist,
+      Optional[String]  $lastfm_api_key,
+      Optional[String]  $lastfm_api_secret,
 | -%>
 <% if $log_level { -%>
 LogLevel = '<%= $log_level %>'
@@ -38,4 +40,10 @@ Port = <%= $port %>
 <% } -%>
 <% if $reverse_proxy_whitelist { -%>
 ReverseProxyWhitelist = <%= $reverse_proxy_whitelist %>
+<% } -%>
+<% if $lastfm_api_key { -%>
+LastFM.ApiKey = <%= $lastfm_api_key %>
+<% } -%>
+<% if $lastfm_api_secret { -%>
+LastFM.Secret = <%= $lastfm_api_secret %>
 <% } -%>
