@@ -10,6 +10,8 @@
       Optional[Array[String]]  $reverse_proxy_whitelist,
       Optional[String]  $lastfm_api_key,
       Optional[String]  $lastfm_api_secret,
+      Optional[String]  $spotify_id,
+      Optional[String]  $spotify_secret,
 | -%>
 <% if $log_level { -%>
 LogLevel = '<%= $log_level %>'
@@ -46,4 +48,10 @@ LastFM.ApiKey = '<%= $lastfm_api_key %>'
 <% } -%>
 <% if $lastfm_api_secret { -%>
 LastFM.Secret = '<%= $lastfm_api_secret %>'
+<% } -%>
+<% if $spotify_id { -%>
+Spotify.ID = '<%= $spotify_id %>'
+<% } -%>
+<% if $spotify_secret { -%>
+Spotify.Secret = '<%= $spotify_secret %>'
 <% } -%>
