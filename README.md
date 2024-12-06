@@ -1,117 +1,73 @@
 # navidrome
 
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
+This is a puppet module for navidrome.
 
-The README template below provides a starting point with details about what
-information to include in your README.
+Navidrome repository: https://github.com/navidrome/navidrome|
 
-## Table of Contents
+## Common purpose
+Navidrome is a music streaming server written in go. It is comaptible with the subsonic api.
 
-1. [Description](#description)
-1. [Setup - The basics of getting started with navidrome](#setup)
-    * [What navidrome affects](#what-navidrome-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with navidrome](#beginning-with-navidrome)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+## Compatibility
+This module was tested on an AlmaLinux 9 system. It should work on most newer RHEL operating systems.
 
-## Description
+## Installation
+Run the following command on your puppet server to install the navidrome module:
+`puppet module install g3ntlef0x-navidrome`
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
+## Usage examples
+Import class in your manifest file:
+`include navidrome`
 
-This should be a fairly short description helps the user decide if your module
-is what they want.
-
-## Setup
-
-### What navidrome affects **OPTIONAL**
-
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
-
-If there's more that they should know about, though, this is the place to
-mention:
-
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with navidrome
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
-
-## Usage
-
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
-
-## Reference
-
-This section is deprecated. Instead, add reference information to your code as
-Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your
-module. For details on how to add code comments and generate documentation with
-Strings, see the [Puppet Strings documentation][2] and [style guide][3].
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the
-root of your module directory and list out each of your module's classes,
-defined types, facts, functions, Puppet tasks, task plans, and resource types
-and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-* The data type, if applicable.
-* A description of what the element does.
-* Valid values, if the data type doesn't make it obvious.
-* Default value, if any.
-
-For example:
-
+To configure navidrome, most default options can be used.
+However, make sure to at least set the following options:
+```yaml
+navidrome::configuration::base_url: 'https://example.com'
+navidrome::configuration::scan_schedule: '@every 2h'
+navidrome::configuration::lastfm_api_key: 'xxx'
+navidrome::configuration::lastfm_api_secret: 'xxx'
+navidrome::configuration::spotify_id: 'xxx'
+navidrome::configuration::spotify_secret: 'xxx
 ```
-### `pet::cat`
+The spotify and lastfm options are optional. Lastfm and the spotify api are used to retrieve artworks and covers.
 
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
+## Configuration options
+All currently available configuration options and their default values are listed here:
+```yaml
+---
+navidrome::version: '0.53.3'
+navidrome::user: &user 'navidrome'
+navidrome::ensure: running
+navidrome::enable: true
+navidrome::service_name: 'navidrome'
+navidrome::password: 'navidromepwd'
+navidrome::executable_dir: '/opt/navidrome'
+navidrome::working_dir: &working_dir '/var/lib/navidrome'
+navidrome::ffmpeg_ensure: present
+navidrome::ffmpeg_name: 'ffmpeg'
+navidrome::configuration::music_folder: '/var/data/music'
+navidrome::configuration::log_level: 'debug'
+navidrome::configuration::scan_schedule: '@every 12h'
+navidrome::configuration::transcoding_cache_size: '150MiB'
+navidrome::configuration::systemd_description: 'Systemd service for the navidrome application'
+navidrome::configuration::systemd_path: *working_dir
+navidrome::configuration::systemd_after: 'remote-fs.target network.target'
+navidrome::configuration::systemd_user: *user
+navidrome::configuration::systemd_wantedby: 'multi-user.target'
+navidrome::configuration::systemd_type: 'simple'
+navidrome::configuration::systemd_navidrome_location: '/opt/navidrome/navidrome'
+navidrome::configuration::systemd_settings_location: '/var/lib/navidrome/navidrome.toml'
+navidrome::configuration::systemd_working_dir: *working_dir
+navidrome::configuration::systemd_timeout_stop_sec: 20
+navidrome::configuration::systemd_killmode: 'process'
+navidrome::configuration::systemd_restart: 'on-failure'
+navidrome::configuration::data_folder:
+navidrome::configuration::cache_folder:
+navidrome::configuration::address:
+navidrome::configuration::base_url:
+navidrome::configuration::port:
+navidrome::configuration::reverse_proxy_whitelist:
+navidrome::configuration::lastfm_api_key:
+navidrome::configuration::lastfm_api_secret:
+navidrome::configuration::spotify_id:
+navidrome::configuration::spotify_secret:
 ```
-
-## Limitations
-
-In the Limitations section, list any incompatibilities, known issues, or other
-warnings.
-
-## Development
-
-In the Development section, tell other users the ground rules for contributing
-to your project and how they should submit their work.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel are
-necessary or important to include here. Please use the `##` header.
-
-[1]: https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-[2]: https://puppet.com/docs/puppet/latest/puppet_strings.html
-[3]: https://puppet.com/docs/puppet/latest/puppet_strings_style.html
