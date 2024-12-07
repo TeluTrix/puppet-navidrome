@@ -61,6 +61,7 @@ class navidrome::configuration (
         'systemd_path'               => $systemd_path,
         'systemd_after'              => $systemd_after,
         'systemd_user'               => $systemd_user,
+        'systemd_group'              => $navidrome::group,
         'systemd_wantedby'           => $systemd_wantedby,
         'systemd_type'               => $systemd_type,
         'systemd_navidrome_location' => $systemd_navidrome_location,

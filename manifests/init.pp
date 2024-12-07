@@ -10,6 +10,7 @@ class navidrome (
   Optional[String]  $service_name,
   Optional[String]  $version,
   Optional[String]  $user,
+  Optional[String]  $group,
   Optional[String]  $password,
   Optional[String]  $executable_dir,
   Optional[String]  $working_dir,
@@ -63,6 +64,7 @@ class navidrome (
   user { $user:
     ensure   => present,
     name     => $user,
+    groups   => [$group],
     password => $password,
   }
 
@@ -70,21 +72,21 @@ class navidrome (
     ensure => directory,
     path   => $music_folder,
     owner  => $user,
-    group  => $user,
+    group  => $group,
   }
 
   file { $executable_dir:
     ensure => directory,
     path   => $executable_dir,
     owner  => $user,
-    group  => $user,
+    group  => $group,
   }
 
   file { $working_dir:
     ensure => directory,
     path   => $working_dir,
     owner  => $user,
-    group  => $user,
+    group  => $group,
   }
 
   $archive_name = "navidrome_${version}_linux_amd64.tar.gz"
@@ -93,7 +95,7 @@ class navidrome (
     ensure       => 'present',
     source       => $download_uri,
     user         => $user,
-    group        => $user,
+    group        => $group,
     extract      => true,
     extract_path => $executable_dir,
   }

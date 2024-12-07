@@ -1,10 +1,11 @@
 {
   "name": "g3ntlef0x-navidrome",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "G3ntleF0x",
-  "summary": "",
+  "summary": "Install and manage your own navidrome music server.",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/TeluTrix/puppet-navidrome/",
+  "project_page": "https://github.com/TeluTrix/puppet-navidrome/",
   "dependencies": [
 
   ],

@@ -1,6 +1,7 @@
 ---
 navidrome::version: '0.53.3'
 navidrome::user: &user 'navidrome'
+navidrome::group: 'media'
 navidrome::ensure: running
 navidrome::enable: true
 navidrome::service_name: 'navidrome'
