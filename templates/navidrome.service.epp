@@ -24,7 +24,7 @@ WantedBy=<%= $systemd_wantedby %>
 User=<%= $systemd_user %>
 Group=<%= $systemd_group %>
 Type=<%= $systemd_type %>
-ExecStart=<%= $systemd_navidrome_location %>/Lidarr --configfile "<%= $systemd_settings_location %>"
+ExecStart=<%= $systemd_navidrome_location %> --configfile "<%= $systemd_settings_location %>"
 WorkingDirectory=<%= $systemd_working_dir %>
 TimeoutStopSec=<%= $systemd_timeout_stop_sec %>
 KillMode=<%= $systemd_killmode %>
