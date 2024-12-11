@@ -2,7 +2,28 @@
 #
 # A description of what this class does
 #
-# @example
+# @param ensure
+#   standard ensure parameter
+# @param enable
+#   standard enable parameter
+# @param service_name
+#   service name for the navidrome systemd service
+# @param version
+#   provide navidrome version (default -> latest)
+# @param user
+#   system username for navidrome user
+# @param group
+#   system group for navidrom user
+# @param password
+#   system user password for navidrome user
+# @param executable_dir
+#   executable directory for the navidrome app
+# @param working_dir
+#   working directory for the navidrome app
+# @param ffmpeg_ensure
+#   ensure param for ffmpeg package
+# @param ffmpeg_name
+#   name of ffmpeg package
 #   include navidrome
 class navidrome (
   Optional[String]  $ensure,
@@ -21,7 +42,7 @@ class navidrome (
   include navidrome::configuration
 
   package { 'epel-release':
-    ensure  => $package_ensure,
+    ensure  => $ensure,
   }
 
   exec { 'enable_epel_repo':
@@ -70,7 +91,7 @@ class navidrome (
 
   file { $navidrome::configuration::music_folder:
     ensure => directory,
-    path   => $music_folder,
+    path   => $navidrome::configuration::music_folder,
     owner  => $user,
     group  => $group,
   }

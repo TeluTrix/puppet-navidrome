@@ -2,7 +2,7 @@
 
 This is a puppet module for navidrome.
 
-Navidrome repository: https://github.com/navidrome/navidrome|
+Navidrome repository: https://github.com/navidrome/navidrome
 
 ## Common purpose
 Navidrome is a music streaming server written in go. It is comaptible with the subsonic api.
@@ -12,15 +12,20 @@ This module was tested on an AlmaLinux 9 system. It should work on most newer RH
 
 ## Installation
 Run the following command on your puppet server to install the navidrome module:
-`puppet module install g3ntlef0x-navidrome`
+```bash
+puppet module install g3ntlef0x-navidrome
+```
 
 ## Usage examples
 Import class in your manifest file:
-`include navidrome`
+```yaml
+include navidrome
+```
 
 To configure navidrome, most default options can be used.
 However, make sure to at least set the following options:
 ```yaml
+---
 navidrome::configuration::base_url: 'https://example.com'
 navidrome::configuration::scan_schedule: '@every 2h'
 navidrome::configuration::lastfm_api_key: 'xxx'
