@@ -42,7 +42,7 @@ class navidrome (
   include navidrome::configuration
 
   package { 'epel-release':
-    ensure  => $ensure,
+    ensure  => present,
   }
 
   exec { 'enable_epel_repo':
