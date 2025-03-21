@@ -1,5 +1,5 @@
 ---
-navidrome::version: '0.53.3'
+navidrome::version: '0.55.1'
 navidrome::user: &user 'navidrome'
 navidrome::group: 'media'
 navidrome::ensure: running
